@@ -1,0 +1,94 @@
+<!Doctype html>
+<html lang="en">
+<head>
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+   <style>
+   .checkbox{
+   	margin:5px;
+   }
+</style>
+	</head>
+
+
+<body>
+
+
+<h1>My To Do's!</h1>
+<span id="to-do"> To Do Item: <input type="text" id="inpt"><input type="submit" value="Submit" id="sub"></span>
+<hr>
+<div id="items"></div>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+	
+	var todoCount=0;
+	$("#sub").click(function(event){
+		event.preventDefault();
+
+		// get the to do value from the textbox input and add it to a variable
+		var insertItem=$("#inpt").val().trim();
+
+		// create p tag to add all the inserted items to display
+		var itemContainer=$("<p>");
+		
+		// give it an id
+		itemContainer.attr("id", "item-"+todoCount);
+		
+		// then append the text value in p tag
+		itemContainer.append(insertItem);
+
+		// create a button to remove the item
+
+		var closeButton=$("<button>");
+		closeButton.attr("each-data", todoCount);
+		closeButton.addClass("checkbox");
+
+		// append the check mark in the close button we created
+		closeButton.append("√");
+		// put the x button infront of the itembox
+		itemContainer=itemContainer.prepend(closeButton);
+		// again add the itemContainer to the div called items
+
+		$("#items").append(itemContainer);
+
+		// clear the textbox when done
+		$("inpt").val("");
+		// add to todoCount
+		todoCount++;
+
+});
+	$(document.body).on("click", ".checkbox", function(){
+		// get the number from it's data attribute and hold it in a new variable
+		var dataNumber=$(this).attr("each-data");
+		// remove the P tags when clicked
+		$("#item-"+dataNumber).remove();
+
+	});
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
